@@ -9,5 +9,10 @@
     <ul th:each="item : ${items}">
     	<li th:text="${item}"/>
     </ul>
+    
+    <form action="#" th:action="@{/}" th:object="${feedback}" method="post">
+    	<label for="comment">Comment</label>
+    	<input type="text" th:field="*{comment}" />
+	</form>
 </body>
 </html>
