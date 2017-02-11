@@ -49,6 +49,8 @@ public class TaskController {
 	        return "task";
 	    }
 	    
+	    System.err.println(task.toMap()); //FIXME web callback
+	    
 	    return "redirect:/done/" + taskId;
 	}
 	

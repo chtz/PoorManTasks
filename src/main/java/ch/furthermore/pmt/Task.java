@@ -1,7 +1,9 @@
 package ch.furthermore.pmt;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -52,5 +54,14 @@ public class Task {
 			f.setName(of.getName());
 			f.setType(of.getType());
 		}
+	}
+
+	public Map<String,String> toMap() {
+		Map<String,String> result = new HashMap<>();
+		for (Field f : fields) {
+			result.put(f.getName(), f.getValue());
+		}
+		
+		return result;
 	}
 }
