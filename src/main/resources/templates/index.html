@@ -4,36 +4,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title th:text="${title}" />
-    <style>
-    	.fieldError { background-color: red; }
-    </style> 
+    <title>Nothing to see here</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
 </head>
 <body>
  <div class="container">
-  <form action="#" th:action="@{/}" th:object="${feedback}" method="post" class="form-horizontal">
-   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-     <h2 th:text="${title}" />
-     <ul th:each="item : ${items}">
-      <li th:text="${item}"/>
-     </ul>
-    </div>
-   </div>
-   <div class="form-group" th:classappend="${#fields.hasErrors('comment')} ? has-error : ''">
-   	<label for="comment" class="col-sm-2 control-label">Comment</label>
-   	<div class="col-sm-10">
-   	 <input type="text" th:field="*{comment}" class="form-control" placeholder="Comment" autofocus="true" />
-   	 <span class="help-block" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Incorrect</span>
-   	</div>
-   </div>
-   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-   	 <button class="btn btn-primary" type="submit">Send</button>
-   	</div>
-   </div>
-  </form>
+  <h2>Nothing to see here</h2>
  </div>	
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
