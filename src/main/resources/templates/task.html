@@ -9,8 +9,7 @@
 </head>
 <body>
  <div class="container">
-  <form action="#" th:action="@{/completion}" th:object="${task}" method="post" class="form-horizontal">
-   <input type="hidden" th:field="*{id}" />
+  <form th:object="${task}" method="post" class="form-horizontal">
    <div class="form-group" th:classappend="${#fields.hasErrors('id')} ? has-error : ''">
     <div class="col-sm-offset-2 col-sm-10">
    	 <h2>Task</h2>

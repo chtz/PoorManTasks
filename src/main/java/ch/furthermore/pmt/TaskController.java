@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,22 +29,22 @@ public class TaskController {
 	@Autowired
 	private TaskDAO taskDAO;
 	
-	@RequestMapping("/tasks/{taskId}")
-    public String showTask(final Task task, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
+	@RequestMapping("/completions/{taskId}")
+    public String showTask(Task task, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
 		task.replaceWith(taskDAO.load(taskId));
 		
         return "task";
     }
 	
-	@RequestMapping(value="/completion", method=RequestMethod.POST)
-	public String saveTask(@Valid Task task, final BindingResult bindingResult, final ModelMap model) throws JsonParseException, JsonMappingException, IOException {
-		task.enrichWith(taskDAO.load(task.getId()));
+	@RequestMapping(value="/completions/{taskId}", method=RequestMethod.POST)
+	public String saveTask(@Valid Task task, BindingResult bindingResult, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
+		task.enrichWith(taskDAO.load(taskId)); 
 		
 	    if (bindingResult.hasErrors()) {
 	        return "task";
 	    }
 	    
-	    return "redirect:/tasks/" + task.getId();
+	    return "redirect:/completions/" + taskId;
 	}
 	
 	@RequestMapping(path="/tasks",method=RequestMethod.POST,consumes="application/json",produces="application/json")
