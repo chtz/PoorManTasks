@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * Sample
  * <pre>
  * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" http://localhost:8080/tasks
- * curl http://localhost:8080/tasks/dd35af46-0935-4316-9ef7-232ae6dbe705
+ * curl http://localhost:8080/pending/dd35af46-0935-4316-9ef7-232ae6dbe705
  * </pre>
  */
 @Controller
@@ -29,14 +29,19 @@ public class TaskController {
 	@Autowired
 	private TaskDAO taskDAO;
 	
-	@RequestMapping("/completions/{taskId}")
+	@RequestMapping("/done/{taskId}")
+    public String showTaskDone(Task task, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
+        return "taskdone";
+    }
+	
+	@RequestMapping("/pending/{taskId}")
     public String showTask(Task task, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
 		task.replaceWith(taskDAO.load(taskId));
 		
         return "task";
     }
 	
-	@RequestMapping(value="/completions/{taskId}", method=RequestMethod.POST)
+	@RequestMapping(value="/pending/{taskId}", method=RequestMethod.POST)
 	public String saveTask(@Valid Task task, BindingResult bindingResult, @PathVariable("taskId") String taskId) throws JsonParseException, JsonMappingException, IOException {
 		task.enrichWith(taskDAO.load(taskId)); 
 		
@@ -44,7 +49,7 @@ public class TaskController {
 	        return "task";
 	    }
 	    
-	    return "redirect:/completions/" + taskId;
+	    return "redirect:/done/" + taskId;
 	}
 	
 	@RequestMapping(path="/tasks",method=RequestMethod.POST,consumes="application/json",produces="application/json")

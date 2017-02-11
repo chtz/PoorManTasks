@@ -27,7 +27,7 @@ public class TaskDAO {
 	}
 
 	public Task load(String id) throws JsonParseException, JsonMappingException, IOException {
-		File taskFile = new File(storage, id + ".json");
+		File taskFile = new File(storage, UUID.fromString(id).toString() + ".json");
 		
 		ObjectMapper om = new ObjectMapper();
 		return om.readValue(taskFile, Task.class);
