@@ -34,21 +34,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Application {
 	private final Logger logger = LoggerFactory.getLogger(Application.class);
 	
+	@ModelAttribute("title")
+	public String populateTitle() {
+		return "poor-man-tasks";
+	}
+	
 	@ModelAttribute("items")
 	public List<String> populateItems() {
-	    return Arrays.asList(new String[]{"version: 1.0","hash: " + System.identityHashCode(this)});
+	    return Arrays.asList(new String[]{"version: 1.0"});
 	}
 	
 	@RequestMapping("/")
     public String index(final Feedback feedback, Model model) {
-        model.addAttribute("title", "nothing to see here (" + System.identityHashCode(this) + ")");
+//        model.addAttribute("title", "nothing to see here (" + System.identityHashCode(this) + ")");
         return "index";
     }
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public String saveFeedback(@Valid Feedback feedback, final BindingResult bindingResult, final ModelMap model) {
 	    if (bindingResult.hasErrors()) {
-	    	model.addAttribute("title", "Comment must not be empty");
+//	    	model.addAttribute("title", "Comment must not be empty");
 	    	
 	        return "index";
 	    }
