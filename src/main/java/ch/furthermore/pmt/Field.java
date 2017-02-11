@@ -1,9 +1,15 @@
 package ch.furthermore.pmt;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Field {
 	private String name;
+	
 	private String label;
+	
+	@NotBlank
 	private String value;
+	
 	private FieldType type;
 
 	public String getName() {

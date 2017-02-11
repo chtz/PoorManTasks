@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,6 +26,13 @@ public class TaskDAO {
 		storage.mkdirs();
 	}
 
+	public Task load(String id) throws JsonParseException, JsonMappingException, IOException {
+		File taskFile = new File(storage, id + ".json");
+		
+		ObjectMapper om = new ObjectMapper();
+		return om.readValue(taskFile, Task.class);
+	}
+	
 	public void insert(Task task) throws JsonGenerationException, JsonMappingException, IOException {
 		task.setId(task.getId() == null ? UUID.randomUUID().toString() : UUID.fromString(task.getId()).toString());
 		
