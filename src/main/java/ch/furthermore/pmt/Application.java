@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Build Samples:
  * <pre>
  * mvn package docker:build
- * docker push dockerchtz/PoorManTasks:latest
+ * docker push dockerchtz/pmt:latest
  * </pre>
  * 
  * Run Samples:
  * <pre>
- * docker run -p 8080:8080 -d dockerchtz/PoorManTasks
+ * docker run -p 9090:9090 -d dockerchtz/pmt
  * </pre>
  */
 @SpringBootApplication
