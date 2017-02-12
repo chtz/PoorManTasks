@@ -20,8 +20,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 /**
  * Sample
  * <pre>
- * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" http://localhost:8080/tasks
- * curl http://localhost:8080/pending/dd35af46-0935-4316-9ef7-232ae6dbe705
+ * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" http://localhost:9090/tasks
+ * curl http://localhost:9090/pending/dd35af46-0935-4316-9ef7-232ae6dbe705
  * </pre>
  */
 @Controller
