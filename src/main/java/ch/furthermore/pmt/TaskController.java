@@ -20,8 +20,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 /**
  * Sample
  * <pre>
- * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" http://localhost:9090/tasks
- * curl http://localhost:9090/pending/dd35af46-0935-4316-9ef7-232ae6dbe705
+ * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" https://pmt.furthermore.ch/tasks
+ * curl https://pmt.furthermore.ch/pending/8bd2f85d-ae83-4899-a93d-1533c341b719
  * </pre>
  */
 @Controller
@@ -49,7 +49,8 @@ public class TaskController {
 	        return "task";
 	    }
 	    
-	    System.err.println(task.toMap()); //FIXME web callback
+	    //FIXME web callback
+	    //FIXME delete task
 	    
 	    return "redirect:/done/" + taskId;
 	}
