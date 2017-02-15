@@ -14,6 +14,16 @@ public class Task {
 	private List<Field> fields = new LinkedList<>();
 	
 	private String callbackUrl;
+	
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getId() {
 		return id;
@@ -43,10 +53,12 @@ public class Task {
 		id = other.id;
 		fields = other.fields;
 		callbackUrl = other.callbackUrl;
+		email = other.email;
 	}
 	
 	public void enrichWith(Task other) {
 		callbackUrl = other.callbackUrl;
+		email = other.email;
 		for (int i = 0; i < fields.size(); i++) {
 			Field f = fields.get(i);
 			Field of = other.fields.get(i);
