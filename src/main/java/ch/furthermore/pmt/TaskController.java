@@ -45,6 +45,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * curl -s -d '{"task":{"callbackUrl":"http://foo", "fields":[{"name":"foo","label":"Foo","value":"default","type":"INPUT"}]}}' -H"Content-Type:application/json" https://pmt.furthermore.ch/tasks
  * curl https://pmt.furthermore.ch/pending/8bd2f85d-ae83-4899-a93d-1533c341b719
  * </pre>
+ * 
+ * Apache
+ * <pre>
+ * <IfModule mod_ssl.c>
+ * <VirtualHost *:443>
+ * RequestHeader set X-Forwarded-Proto "https"
+ * RequestHeader set X-Forwarded-Port "443"
+ * ServerName pmt.furthermore.ch
+ * ServerAdmin pmtadmin@furthermore.ch
+ * ErrorLog ${APACHE_LOG_DIR}/error.log
+ * CustomLog ${APACHE_LOG_DIR}/access.log combined
+ * ProxyPreserveHost On
+ * ProxyPass / http://10.0.0.12:9090/
+ * ProxyPassReverse / http://10.0.0.12:9090/
+ * RewriteEngine on
+ * RewriteCond %{SERVER_NAME} =pmt.furthermore.ch
+ * SSLCertificateFile /etc/letsencrypt/live/pmt.furthermore.ch/fullchain.pem
+ * SSLCertificateKeyFile /etc/letsencrypt/live/pmt.furthermore.ch/privkey.pem
+ * Include /etc/letsencrypt/options-ssl-apache.conf
+ * </VirtualHost>
+ * </IfModule>
+ * </pre>
  */
 @SuppressWarnings("deprecation")
 @Controller
