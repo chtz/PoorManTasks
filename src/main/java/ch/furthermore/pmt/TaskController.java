@@ -6,6 +6,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,13 +117,46 @@ public class TaskController {
 	}
 	
 	private String serverUrlPrefix() {
+		/*
+		 * Header x-forwarded-proto='https'
+		 * Header x-forwarded-port='443'
+		 * Header x-forwarded-host='pmt.furthermore.ch'
+		 */
+		for (Enumeration<String> e = request.getHeaderNames(); e.hasMoreElements(); ) {
+			String name = e.nextElement();
+			
+			log.info("Header {}='{}'", name, request.getHeader(name)); //TODO DEBUG log
+		}
+		
 		StringBuilder dashboardUrlPrefix = new StringBuilder();
-		dashboardUrlPrefix.append(request.getScheme()); //FIXME is not https behind apache
+		
+		if (request.getHeader("x-forwarded-proto") != null) {
+			dashboardUrlPrefix.append(request.getHeader("x-forwarded-proto"));
+		}
+		else {
+			dashboardUrlPrefix.append(request.getScheme()); 
+		}
+		
 		dashboardUrlPrefix.append("://");
-		dashboardUrlPrefix.append(request.getServerName());
+		
+		if (request.getHeader("x-forwarded-host") != null) {
+			dashboardUrlPrefix.append(request.getHeader("x-forwarded-host"));
+		}
+		else {
+			dashboardUrlPrefix.append(request.getServerName());
+		}
+		
 		dashboardUrlPrefix.append(":");
-		dashboardUrlPrefix.append(request.getServerPort());
+		
+		if (request.getHeader("x-forwarded-port") != null) {
+			dashboardUrlPrefix.append(request.getHeader("x-forwarded-port"));
+		}
+		else {
+			dashboardUrlPrefix.append(request.getServerPort());
+		}
+		
 		dashboardUrlPrefix.append(request.getContextPath());
+		
 		dashboardUrlPrefix.append("/");
 		
 		return dashboardUrlPrefix.toString();
