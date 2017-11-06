@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class TaskDAO {
-	@Value(value="${storagePath:storage}")
+	@Value(value="${storagePath:taskstor}")
 	private String storagePath;
 	private File storage;
 	

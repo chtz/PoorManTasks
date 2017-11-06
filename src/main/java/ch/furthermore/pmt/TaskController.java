@@ -127,8 +127,9 @@ public class TaskController {
 			
 			if (request.getTask().getEmail() != null) {
 				String taskUrl = serverUrlPrefix() + "pending/" + request.getTask().getId();
-				
-				mailClient.send(request.getTask().getEmail(), "New task", taskUrl);
+				String subject = (String)request.getTask().toMap().get("subject");
+				if (subject == null) subject = "New Task";
+				mailClient.send(request.getTask().getEmail(), subject, taskUrl);
 			}
 		}
 		catch (Exception e) {
